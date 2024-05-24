@@ -1,0 +1,15 @@
+https://recursion.vercel.app/
+
+Sample Python:
+
+def fn(index):
+  if (index == len(nums)):
+    return nums
+  i = index
+  while(i<len(nums)):
+    temp = nums[i];
+    nums[i] = nums[index]
+    nums[index] = temp
+    fn(index+1)
+    nums[i], nums[index] = nums[index], nums[i]
+    i+=1

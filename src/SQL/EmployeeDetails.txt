@@ -1,0 +1,8 @@
+EmployeeDetails
+
+select employee_name from EmplyeeDetails e inner join employeedetails m on e.enpid=m.managerid;
+
+
+find all rec for all american cities where populatuin is more than 100000 and code for usa is USA
+	
+	select * from CITY where COUNTRYCODE="USA" and POPULATION>100000;
