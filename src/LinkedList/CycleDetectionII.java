@@ -22,36 +22,25 @@ class CycleDetectionII {
 	}
 
 	public static ListNode detectCycle(ListNode head) {
-		ListNode interact = interaction(head);
-		ListNode curr = head;
-		if(interact==null) {
-			return null;
-		}
-		while(curr!=interact) {
-			curr=curr.next;
-			interact=interact.next;
-		}
-		return curr;
-	}
-
-	public static ListNode interaction(ListNode head) {
-		if(head==null) {
-			return null;
-		}
-
-		ListNode slow = head;
-		ListNode fast = head;
-
-		while(fast!=null && fast.next!=null) {
-			slow=slow.next;
-			fast=fast.next.next;
-			if(slow==fast) {
-				return fast;
-			}
-		}
-
-		return null;
-	}
+        ListNode slow, fast;
+        
+        slow = fast = head;
+        
+        while(fast!=null && fast.next!=null) {
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast) break;
+        }
+        
+        if(fast==null || fast.next==null) return null;
+        
+        fast=head;
+        while(fast!=slow) {
+            fast=fast.next;
+            slow=slow.next;
+        }
+        return slow;
+    }
 }
 
 

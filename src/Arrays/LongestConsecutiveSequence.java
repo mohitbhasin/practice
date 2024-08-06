@@ -47,7 +47,7 @@ class LongestConsecutiveSequence {
 		return result;
 	}
 
-	//
+	// Time Complexity O(n)
 	public static int longestConsecutive(int[] nums) {
 		Set<Integer> set = new HashSet<>();
 		for(int num: nums) set.add(num);

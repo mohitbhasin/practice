@@ -1,68 +1,57 @@
 import java.util.*;
 
-// Incorrect
 class LFUCache {
-	HashMap<Integer, Node> cache;
-	PriorityQueue<Node> que;
-	int capacity;
-	int size;
+    Map<Integer, Pair> cache;
+    Map<Integer, LinkedHashSet<Integer>> frequencies;
+    int capacity;
+    int minFreq;
 
-	public LFUCache(int capacity) {
-		this.capacity = capacity;
-		this.size = 0;
-		this.cache = new HashMap<Integer, Node>();
-        this.que = new PriorityQueue<Node>((a,b) -> a.count - b.count);
-        // this.que = new PriorityQueue<Node>(new Comparator<Node>() {
-        // 	@Override
-        //     public int compare(Node a, Node b) {
-        // 		return a.count - b.count;
-        // 	}
-        // });
+    public LFUCache(int capacity) {
+        this.cache = new HashMap<>();
+        this.frequencies = new HashMap<>();
+        this.capacity=capacity;
+        this.minFreq=0;
     }
-    
+
     public int get(int key) {
-        if(cache.containsKey(key)) {
-        	Node node = cache.get(key);
-        	node.count++;
-        	return node.value;
+        if(!cache.containsKey(key)) return -1;
+        Pair pair = cache.get(key);
+        frequencies.get(pair.frequency).remove(key);
+        if(frequencies.get(pair.frequency).isEmpty()) {
+            frequencies.remove(pair.frequency);
         }
-        return -1;
+        if(minFreq==pair.frequency && frequencies.get(pair.frequency)==null) {
+            minFreq++;
+        }
+        pair.frequency++;
+        frequencies.putIfAbsent(pair.frequency, new LinkedHashSet<>());
+        frequencies.get(pair.frequency).add(key);
+        return pair.value;
     }
     
     public void put(int key, int value) {
-        Node node;
-        if(!cache.containsKey(key)) {
-            size++;
-            // System.out.println(key+"->"+que);
-            if(size>capacity) {
-                node = que.poll();
-                // System.out.println("polled="+node.key);
-                cache.remove(node.key);
-                size--;
-            }
-        	node = new Node(key, value);
-        	cache.put(key, node);
-            que.add(node);
+        if(cache.containsKey(key)) {
+            cache.get(key).value=value;
+            get(key);
         } else {
-        	node = cache.get(key);
-        	node.count++;
+            if(cache.size()>=capacity) {
+                int minKey = frequencies.get(minFreq).iterator().next();
+                frequencies.get(minFreq).remove(minKey);
+                cache.remove(minKey);
+            }
+            cache.put(key, new Pair(value, 1));
+            frequencies.putIfAbsent(1, new LinkedHashSet<>());
+            frequencies.get(1).add(key);
+            minFreq=1;
         }
     }
-}
 
-
-class Node {
-	int key;
-	int value;
-	int count;
-
-	Node(int key, int value) {
-		this.key = key;
-		this.value = value;
-		this.count = 1;
-	}
-
-    public String toString() {
-        return "["+key+":"+value+" c:"+count+"]";
+    class Pair {
+        int value;
+        int frequency;
+        public Pair(int value, int frequency) {
+            this.value = value;
+            this.frequency = frequency;
+        }
     }
 }
