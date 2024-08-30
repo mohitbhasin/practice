@@ -5,8 +5,27 @@ class BinayTreePaths {
 		TreeNode tree = new TreeNode();
 		TreeNode root = tree.getTree();
 
+        System.out.println(binaryTreePaths_better(root));
 		System.out.println(binaryTreePaths(root));
 	}
+
+    public static List<String> binaryTreePaths_better(TreeNode root) {
+        List<String> result = new ArrayList<>();
+        helper(root, result, "");
+        return result;
+    }
+    
+    public static void helper(TreeNode root, List<String> result, String path) {
+        if(root==null) return;
+        if(root.left==null && root.right==null) {
+            path+=root.val;
+            result.add(path);
+            return;
+        }
+        path+=root.val+"->";
+        helper(root.left, result, path);
+        helper(root.right, result, path);
+    }
 
 	static List<String> paths;
     public static List<String> binaryTreePaths(TreeNode root) {
