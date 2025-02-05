@@ -2,23 +2,50 @@ import java.util.*;
 
 class HappyNumbers {
 	public static void main(String args[]) {
-		System.out.println(isHappy(188));
+	   System.out.println(isHappyNumber(188));
+        System.out.println(isHappyNumber(10));
+        System.out.println(isHappy_withHashSet(188));
+        System.out.println(isHappy_withHashSet(10));
 	}
 
-	public static boolean isHappy(int n) {
+    // Time complexity O(log n), where n is the number itself. Space complexity O(1)
+    public static boolean isHappyNumber(int n) {
+      int slowPointer = n;
+      int fastPointer = sumOfSquares(n);
+      
+      while(fastPointer!=1) {
+        slowPointer=sumOfSquares(slowPointer);
+        fastPointer=sumOfSquares(fastPointer);
+        fastPointer=sumOfSquares(fastPointer);
+        if(slowPointer==fastPointer) return false;
+      }
+      
+      return true;
+    }
+    
+    public static int sumOfSquares(int n) {
+      int sum = 0;
+      while(n>0) {
+        sum+=Math.pow(n%10,2);
+        n/=10;
+      }
+      return sum;
+    }
+
+    // Naive approach. Time complexity O(log n), Space complexity O(log n)
+	public static boolean isHappy_withHashSet(int n) {
 		Set<Integer> set = new HashSet<>();
-        while(n%3!=0) {
-        	System.out.println(n);
-        	int num=0;
-            if(n==1) {
-                return true; 
-            }
+        
+        while(n>0) {
+            int sum = 0;
             while(n>0) {
-                int temp = n%10;
-				num+=temp*temp;
+                sum+=Math.pow(n%10, 2);
                 n/=10;
             }
-            n=num;
+            if(sum==1) return true;
+            n=sum;
+            if(set.contains(n)) return false;
+            set.add(n);
         }
         return false;
     }

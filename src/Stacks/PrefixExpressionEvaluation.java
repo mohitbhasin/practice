@@ -15,42 +15,35 @@ class PrefixExpressionEvaluation {
     }
 
     public static double evaluate(String[] elements) {
-    	if(elements.length)
     	Stack<Double> stack = new Stack<>();
-    	double a;
-    	double b;
     	for(int i=elements.length-1; i>=0; i--) {
     		String element = elements[i];
-    		switch (element) {
-    			case "/": {
-    				a=stack.pop();
-    				b=stack.pop();
-    				stack.push(a/b);
-    				break;
-    			}
-	    		case "*": {
-    				a=stack.pop();
-    				b=stack.pop();
-    				stack.push(a*b);
-    				break;
-    			}
-	    		case "+": {
-	    				a=stack.pop();
-	    				b=stack.pop();
-	    				stack.push(a+b);
-	    				break;
-    			}
-    			case "-": {
-	    				a=stack.pop();
-	    				b=stack.pop();
-	    				stack.push(a-b);
-	    				break;
-    			}
-	    		default: {
-	    			stack.push(Double.valueOf(element));
-	    		}
-	    	}
+    		if(element.equals("/") || element.equals("*") || element.equals("+") || element.equals("-")) {
+    			stack.push(helper(stack.pop(), stack.pop(), element));
+    		} else {
+    			stack.push(Double.valueOf(element));
+    		}
     	}
-    	return stack.peek();
+    	return stack.pop();
+    }
+    
+    public static double helper(double a, double b, String operator) {
+    	switch (operator) {
+			case "/": {
+				return a/b;
+			}
+    		case "*": {
+				return a*b;
+			}
+    		case "+": {
+    			return a+b;
+			}
+			case "-": {
+    			return a-b;
+			}
+			default: {
+				throw new IllegalArgumentException();
+			}
+    	}
     }
 }
