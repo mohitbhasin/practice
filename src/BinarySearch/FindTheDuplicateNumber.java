@@ -1,4 +1,5 @@
 class FindTheDuplicateNumber {
+	// array contains [1, n] (inclusive)
 	public static void main(String args[]) {
 		int[][] numsArr = {
 			{1,3,4,2,2},
@@ -30,7 +31,7 @@ class FindTheDuplicateNumber {
 
 	}
 
-	// This approach modifies the array, which is not allowed.
+	// This approach modifies the array, which is not allowed in some questions.
 	// liner approach. time complexity=O(n) space complexity=O(1)
 	public static int findDuplicate_negativeMarking(int[] nums) {
 		int duplicate = -1;

@@ -3,7 +3,6 @@ class ListNode {
 	ListNode next;
 
 	ListNode() {
-
 	}
 	
 	ListNode(int val) {

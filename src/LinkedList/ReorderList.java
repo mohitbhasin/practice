@@ -7,8 +7,9 @@ class ReorderList {
 		head.add(3);
 		head.add(4);
 		head.add(5);
-		head.add(6);
-		reorder(head); //Iterative. better because has O(1) space complexity.
+		// head.add(6);
+		head.printList();
+		reorder_constant_space(head); //Iterative. better because has O(1) space complexity.
 		// reorderList_array(head);
 		// reorderList_recursion(head);
 		while(head!=null) {
@@ -17,7 +18,7 @@ class ReorderList {
 		}
 	}
 
-	public static void reorder(ListNode head) {
+	public static void reorder_constant_space(ListNode head) {
 		// find middle
 		ListNode fast = head;
 		ListNode slow = head;
@@ -37,21 +38,12 @@ class ReorderList {
 			prev = curr;
 			curr = temp;
 		}
-
+		prev.printList();
+		head.printList();
 
 		// Merge the two halves
 		ListNode l1 = head;
 		ListNode l2 = prev;
-
-		// while(l1!=null && l2!=null) {
-		// 	ListNode temp1 = l1.next;
-		// 	ListNode temp2 = l2.next;
-
-		// 	l1.next = l2;
-		// 	l2.next = temp1;
-		// 	l2 = temp2;
-		// 	l1 = temp1;
-		// }
 
 		while(l2.next!=null) {
 			ListNode temp = l1.next;
@@ -60,26 +52,6 @@ class ReorderList {
 			l1.next.next=temp;
 			l1 = temp;		
 		}
-
-		// while(l1!=null) {
-		// 	System.out.print(l1.val+"-> ");
-		// 	l1=l1.next;
-		// }
-		// System.out.println();
-		// while(l2!=null) {
-		// 	System.out.print(l2.val+"-> ");
-		// 	l2=l2.next;
-		// }
-
-		// while(l2.next!=null) {
-		// 	ListNode temp = l1.next;
-		// 	l1.next = l2;
-		// 	l1=temp;
-
-		// 	temp = l2.next;
-		// 	l2.next = l1;
-		// 	l2=temp;		
-		// }
 	}
 
 	public static void reorderList_array(ListNode head) {

@@ -5,6 +5,9 @@ class SwapNodesInPairs {
 		head.add(3);
 		head.add(4);
 		head.add(5);
+		head.add(6);
+		head.add(7);
+		head.add(8);
 
 		Node result = swapPairs(head);
 
@@ -15,6 +18,22 @@ class SwapNodesInPairs {
 	}
 
 	public static Node swapPairs(Node head) {
+		Node dummy = new Node(0);
+		dummy.next = head;
+		Node prev = dummy;
+		Node curr = head;
+		while(curr!=null && curr.next!=null) {
+			Node temp = curr.next;
+			curr.next = curr.next.next;
+			temp.next = curr;
+			prev.next = temp;
+			prev=curr;
+			curr=curr.next;
+		}
+		return dummy.next;
+  	}
+
+	public static Node swapPairs_recur(Node head) {
         if(head==null || head.next==null) {
             return head;
         }
