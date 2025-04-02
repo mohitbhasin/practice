@@ -8,7 +8,7 @@ class FindKPairsWithSmallestSums {
 		System.out.println(kSmallestPairs(nums1, nums2, k));
 	}
 
-
+	// Time complexity: O(K*logK)
 	public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
 		PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> (a[0]+a[1]) - (b[0]+b[1]));
 		List<List<Integer>> result = new ArrayList<>();
@@ -23,7 +23,7 @@ class FindKPairsWithSmallestSums {
 			result.add(Arrays.asList(pair[0], pair[1]));
 			
 			int nums2Index = pair[2];
-			if(nums2Index < nums2.length-1) {
+			if(nums2Index < nums2.length-1) { // If the next element in nums2 exist, new pair will be added.
 				pq.offer(new int[]{pair[0], nums2[nums2Index+1], nums2Index+1});
 			}
 		}

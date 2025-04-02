@@ -1,15 +1,21 @@
 class JumpGame {
 	public static void main(String args[]) {
-		// int[] nums = {2,3,1,1,4};
-		// int[] nums = {0,2,3};
-		// int[] nums = {3,0,8,2,0,0,1};
-		int[] nums = {1,1,2,2,0,1,1};
-		// int[] nums = {1,1,1,0};
-		System.out.println(canJump(nums));
+        int[][] numsArr = {
+            {1,1,2,2,0,1,1},
+            {2,3,1,1,4},
+            {0,2,3},
+            {3,0,8,2,0,0,1},
+            {1,1,1,0}
+        };
+        for (int[] nums: numsArr) {
+		  System.out.println(canJump(nums));
+          System.out.println(canJump_leftToRight(nums));
+          System.out.println("--------------");
+        }
 	}
 
 
-	public boolean canJump(int[] nums) {
+	public static boolean canJump(int[] nums) {
         int lastPosition = nums.length - 1;
         for(int  i=nums.length-1; i>=0; i--) {
             if(i + nums[i] >= lastPosition) {
@@ -19,27 +25,15 @@ class JumpGame {
         return lastPosition == 0;
     }
 
-    // wrong solution
-	public static boolean canJump(int[] nums) {
-    	if(nums.length==1 && nums[0]>=0) return true;
-        for(int i=0; i<nums.length-1; i++) {
-        	if(nums[i]==0) return false;
-            for(int j=i; j<=i+nums[i]; j++) {
-                if(nums[j]+i>=nums.length-1) return true;
-            }
+    public static boolean canJump_leftToRight(int[] nums) {
+        if(nums[0]==0 && nums.length>1) return false;
+        int prev=nums[0]-1;
+        for(int i=1; i<nums.length-1; i++) {
+            int curr = nums[i];
+            prev = Math.max(prev, curr);
+            if(prev==0) return false;
+            prev--;
         }
-        return false;
-    }
-    // wrong solution
-    public static boolean canJump(int[] nums) {
-        if(nums.length==1) return true;
-        int maxIndex = 0;
-        
-        for(int i=0; i<nums.length-1; i++) {
-            maxIndex=Math.max(maxIndex, i+nums[i]);
-            if(maxIndex>=nums.length-1) return true;
-        }
-        System.out.println(maxIndex);
-        return false;
+        return true;
     }
 }
