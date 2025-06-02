@@ -5,17 +5,25 @@ class HouseRobber {
 		// int[] nums = {2,7,9,3,1};
 		int[] nums = {2,1,9,12};
 		memo = new int[nums.length];
-		System.out.println(dp(nums, nums.length-1));
+		System.out.println(rob(nums));
+		System.out.println(dp_recursion(nums, nums.length-1));
 		System.out.println(dp_bottomUp(nums));
-		// for(int i: memo) {
-		// 	System.out.print(i+", ");
-		// }
 	}
+
+	public static int rob(int[] nums) {
+        int[] sums = new int[nums.length+1];
+        sums[1]=nums[0];
+        for(int i=1; i<nums.length; i++) {
+            sums[i+1]=Math.max(sums[i], nums[i]+sums[i-1]);
+        }
+        return sums[sums.length-1];
+    }
+
 	static int[] memo;
-	public static int dp(int[] nums, int i) {
+	public static int dp_recursion(int[] nums, int i) {
 		if(i==0) return nums[i];
 		if(i==1) return Math.max(nums[0], nums[1]);
-		memo[i] = Math.max(nums[i]+dp(nums, i-2), dp(nums, i-1));
+		memo[i] = Math.max(nums[i]+dp_recursion(nums, i-2), dp_recursion(nums, i-1));
 
 		return memo[i];
 	}

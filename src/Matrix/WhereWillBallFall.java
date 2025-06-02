@@ -12,8 +12,30 @@ class WhereWillBallFall {
         }
     }
 
-    // intuitive
     public static int[] findBall(int[][] grid) {
+        int[] result = new int[grid[0].length];
+
+        for(int i=0; i<grid[0].length; i++) {
+            result[i] = dfs(0, i, grid);
+        }
+
+        return result;
+    }
+
+    public static int dfs(int row, int col, int[][] grid) {
+        if(row==grid.length) {
+            return col;
+        }
+        int y = grid[row][col] == 1 ? col+1 : col-1;
+
+        if(y<0 || y>=grid[0].length || grid[row][col]!=grid[row][y]) {
+            return -1;
+        }
+        return dfs(row+1, y, grid);
+    }
+
+    // intuitive
+    public static int[] findBall_slow(int[][] grid) {
         Set<int[]> ballSet = new HashSet<>();
         for(int i=0; i<grid[0].length; i++) {
             int[] coordinates = new int[3];

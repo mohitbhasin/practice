@@ -5,7 +5,8 @@ class JumpGame {
             {2,3,1,1,4},
             {0,2,3},
             {3,0,8,2,0,0,1},
-            {1,1,1,0}
+            {1,1,1,0},
+            {3,2,1,0,4}
         };
         for (int[] nums: numsArr) {
 		  System.out.println(canJump(nums));
@@ -27,12 +28,12 @@ class JumpGame {
 
     public static boolean canJump_leftToRight(int[] nums) {
         if(nums[0]==0 && nums.length>1) return false;
-        int prev=nums[0]-1;
+        int maxJump = nums[0]-1;
         for(int i=1; i<nums.length-1; i++) {
-            int curr = nums[i];
-            prev = Math.max(prev, curr);
-            if(prev==0) return false;
-            prev--;
+
+            maxJump = Math.max(maxJump, nums[i]);
+            if(maxJump==0) return false;
+            maxJump--;
         }
         return true;
     }

@@ -10,23 +10,53 @@ class RotateImage {
 		// 					{13,12,11,10,9}
 		// 				};
 		// rotate(matrix);
-		// for(int[] arr: matrix) {
-		// 	System.out.println(Arrays.toString(arr));
-		// }
-		int[][] matrix2 = {
+		int[][] matrix = {
 							{1,2,3,4,5},
 							{6,7,8,9,10},
 							{11,12,13,14,15},
 							{16,17,18,19,20},
 							{21,22,23,24,25}
 						};
-		rotate_simple(matrix2);
-		// for(int[] arr: matrix2) {
-		// 	System.out.println(Arrays.toString(arr));
-		// }
+		// int[][] matrix = {
+		// 					{1,2,3,4},
+		// 					{5,6,7,8},
+		// 					{9,10,11,12},
+		// 					{13,14,15,16}
+		// 				};
+		// rotate_simple(matrix);
+		rotate(matrix);
+		print(matrix);
 	}
 
-	public static void rotate(int[][] mat) {
+	// Clear and Easy to understand
+	public static void rotate(int[][] matrix) {
+        transpose(matrix);
+        reverse(matrix);
+    }
+
+	public static void transpose(int[][] matrix) {
+        for(int i=0; i<matrix.length; i++) {
+            for(int j=i; j<matrix[0].length; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
+    public static void reverse(int[][] matrix) {
+        int n = matrix.length;
+        for(int[] row: matrix) {
+            for(int i=0; i<row.length/2; i++) {
+                int temp = row[i];
+                row[i] = row[n-1-i];
+                row[n-1-i] = temp;
+            }
+        }
+    }
+
+    // 4 way swap - confusing.
+	public static void rotate_4wayswap(int[][] mat) {
 		for(int layer = 0; layer<mat.length/2; layer++) {
 			int first=layer;
 			int last=mat.length-1-layer;
@@ -41,6 +71,7 @@ class RotateImage {
 		}
 	}
 
+	// 4 way swap - bit confusing
 	public static void rotate_simple(int[][] matrix) {
         int n = matrix.length;
         int temp;
@@ -52,7 +83,6 @@ class RotateImage {
                 matrix[n-1-i][n-1-j] = matrix[j][n-1-i];
                 matrix[j][n-1-i] = matrix[i][j];
                 matrix[i][j] = temp;
-                print(matrix);
             }
         }
     }

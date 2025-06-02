@@ -1,45 +1,61 @@
-class WordSearch {
-	static boolean[][] isVisited;
-	public static void main(String args[]) {
-		// char[][] board = {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};
-		char[][] board = {{'C','A','A'},{'A','A','A'},{'B','C','D'}};
+import java.util.*;
 
-		// char[][] board = {{'A','B'},{'C','D'}};
-		// String word = "ABCCED";
-		String word = "AAB";
-		System.out.println(exist(board, word));
+class WordSearch {
+	public static void main(String args[]) {
+		List<char[][]> boardList = new ArrayList<>();
+        List<String> wordList = new ArrayList<>();
+        boardList.add(new char[][] {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}});
+        boardList.add(new char[][] {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}});
+        boardList.add(new char[][] {{'N','W','L','I','M'},{'V','I','L','Q','O'},{'O','L','A','T','O'},{'R','T','A','I','N'},{'O','I','T','N','C'}});
+        boardList.add(new char[][] {{'J','D','E','I','Y'},{'G','I','L','M','O'},{'Z','A','I','E','O'},{'L','T','B','S','N'},{'S','I','T','C','C'}});
+        wordList.add("ABCESEEEFS");
+        wordList.add("ABCB");
+        wordList.add("LATIN");
+        wordList.add("AIM");
+        
+        for(int i=0; i<boardList.size(); i++) {
+            System.out.println(exist(boardList.get(i), wordList.get(i)));
+        }
 	}
 
 	public static boolean exist(char[][] board, String word) {
-        isVisited = new boolean[board.length][board[0].length];
-		for(int i=0; i<board.length; i++) {
-			for(int j=0; j<board[0].length; j++) {
-				if(board[i][j]==word.charAt(0)) {
-					if(search(board, i, j, word, 0)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+        int m = board.length;
+        int n = board[0].length;
+     
+        boolean result = false;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+               if(dfs(board,word,i,j,0)){
+                   result = true;
+               }
+            }
+        }
+     
+        return result;
     }
-
-	public static boolean search(char[][] board, int i, int j, String word, int index) {
-		if(index>=word.length()) {
-			return true;
-		}
-		if(i>=board.length || i<0 || j>=board[0].length || j<0 || board[i][j]!=word.charAt(index)) {
-			return false;
-		}
-		// char temp = board[i][j];
-		// board[i][j]='\0';
-		System.out.println("i = "+i+" j = "+ j+" index = "+index);
-		if(search(board, i+1, j, word, index+1) ||
-				search(board, i, j+1, word, index+1) ||
-				search(board, i, j-1, word, index+1) ||
-				search(board, i-1, j, word, index+1)) {
-			return true;
-		}
-		return false;
-	}
+ 
+public static boolean dfs(char[][] board, String word, int i, int j, int k){
+    int m = board.length;
+    int n = board[0].length;
+ 
+    if(i<0 || j<0 || i>=m || j>=n){
+        return false;
+    }
+ 
+    if(board[i][j] == word.charAt(k)){
+        char temp = board[i][j];
+        board[i][j]='#';
+        if(k==word.length()-1){
+            return true;
+        }else if(dfs(board, word, i-1, j, k+1)
+        ||dfs(board, word, i+1, j, k+1)
+        ||dfs(board, word, i, j-1, k+1)
+        ||dfs(board, word, i, j+1, k+1)){
+            return true;
+        }
+        board[i][j]=temp;
+    }
+ 
+    return false;
+}
 }

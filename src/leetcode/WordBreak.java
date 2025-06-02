@@ -2,70 +2,46 @@ import java.util.*;
 
 class WordBreak{
 	public static void main(String args[]) {
-		// String word = "catsandogcat";
-		// Set<String> wordDict = new HashSet<>();
-		List<String> wordDict = new ArrayList<>();
-
-		// wordDict.add("cats");
-		// wordDict.add("dog");
-		// wordDict.add("sand");
-		// wordDict.add("and");
-		// wordDict.add("cat");
-		// wordDict.add("an");
-		// System.out.println(check(word, wordDict));
-		String word = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
-		wordDict.add("a");
-		wordDict.add("aa");
-		wordDict.add("aaa");
-		wordDict.add("aaaa");
-		wordDict.add("aaaaa");
-		wordDict.add("aaaaaa");
-		wordDict.add("aaaaaaa");
-		wordDict.add("aaaaaaaa");
-		wordDict.add("aaaaaaaaa");
-		wordDict.add("aaaaaaaaaa");
-		System.out.println(wordBreak(word, wordDict));
-		System.out.println(wordBreak2(word, wordDict));
-
-	}
-
-	public static boolean check(String word, Set<String> wordDict) {
-		if(word.length()==0 || word.isEmpty() || wordDict.contains(word)) return true;
-		boolean flag = false;
-		for(int i=0; i<word.length(); i++) {
-			if(wordDict.contains(word.substring(0, i))) {
-				flag=check(word.substring(i), wordDict);
-			}
+		List<String> sList = new ArrayList<>();
+		List<List<String>> dictList = new ArrayList<>();
+		sList.add("catsanddog");
+		dictList.add(Arrays.asList("cat","and","cats","sand","dog"));
+		sList.add("robocat");
+		dictList.add(Arrays.asList("rob","cat","obo","bo","b"));
+		// sList.add("pthckbbdlgcigosexduruboivpspfeyhxdxxscfhwwdmzywxxbsjqcfmpwxaklhbdkupfbfeuurowmwujlcrbhgcvjjjvncuwhhhendsyaltaiwgkfhfxozzphyflqthkdmpcjyvtbmweiznybwciujuirmzjdrpcnioudtopesakztcoygmflxennmvuwumxyhppvotdgvxhmeevjjrrhwgjalfmlesxmredbhyghurxzlgufygzfsjvh");
+		// dictList.add(Arrays.asList("zajkejzgwlswzdut","akcibiociarxuewugzgg","ymhuhpvqjixfmejv","yzdodkcljgkg","qgbrrtoap","zr","tpqpdkjluxni","xvtlcxabl","hymknb","kygxdlgylt","m","pajgeajmeemiqlmr","mghxypjufm","iqtsbcqt","osyrsstrmtyfpc","synpcrkhpf","wckaa","foorwpzqeseiasthdtn","jbtcepwhohgyqrq","vjjrr","ljb","bpzpcbhtjpmkcapssrjb","cnyids","r","ekvlbzwltqdyqxgy","zabkovfszxwv","riaoxuaypmwwtiil","pavgqzz","ruvcdbffqzpepas","nlxkhtohuklcl","dihprtnpeniuhjwp","ytv","gzdkp","rjxenzcedeuwn","y","goteqj","btrohjrftohfxxlvfoz","pewvmsycmstkqztgrpyr","hrqfdnzvqkkas","espymuzbjlzhtvk","hlqwwzfxxnxntxzvcv","jmkjjegviity","pbhgepybaxjjottylbuy","plkytdajgaomysn","ywdrmeyhgvtapnnqcm","qpujgjsodko","imkquulmlhyoy","jgrrqsrbfkqjkznomz","rkwpzhbjr","wfomy","phayhrxp","qokqqhwgejy","oxcnjve","rco","lhbdk","uqtsvedgrns","dbajjbukioszbeorfv","ifpvucfupeuo","oglf","oherfhflxpiz","ngcccyiwpxa","a","ogbe","fy","mfdgwsqfrqammtvw","egzmuujst","qqcemyqxib","oewkbcq","pnjr","bkbczbmiqeumezzsdi","rwjasecbjaes","plmvtuqck","fgfywprxowkd","hfdivgaknnqum","rgggzuuprbcrkc","lazmjbxysenje","foxkzfvshgzpq","bctjajlweiz","ni","bbwddfzukuqajlifmkg","lgtngfjjyjtdedctnao","eheqeqicnnwlmmtgesbb","hloid","dbgy","beoyrbpnvlh","fx","ofwg","dvziswsvjsb","gzyjfsgfvmtfmpr","vupuzbjwkslmv","tjiccqmbkbqukzbz","gqtpqtg","anjp","akb","qgswfhsnrji","uebhgcdfybfxjfvaxh","f","mujzunqkwkgvzmsexxe","cuxkfzbxkpjeecfv","aridofzezgr","ynmdwleya","jjvswomcwkq","ebfqqjdxdzciphuovx","hdmnesjz","qevedhwzhcbuy","xznibneoeqvftgc","mtpqrpjxspwm","julnbcebxb","uevwgfmetdfutl","mvnxhdurqzazopwlchv","whbwrcoos","beox","yfdxfgfoimqdzyfkg","eqwmibcnuodjh","xphnlqnlbmopkmkmswg","tagvg","truvyttlholmlhsemrl","htrzlwkxzw","ygyaexoohwdmpdmby","pi","mqraqfylq","xahkzoj","zfzquogawcewi","zpprf","wphxlw","vwcsllnrmnvmycthz","ijjizjtjwnlzcsnvswp","abuypjcmgljnndb","nziyeazsinhs","bboguxakmclvdr","dx","oivbirzogzwciv","ymxzgfbjtggrunvu","bjjrhygh","ziuz","mljptiufpcpmyulo","rfjy","ykzbflxyhclzuevss","bucygbnpzkaj","eqadqbqrrlnpswqip","nnqtbefvacdsllsd","ufnfhcdqy","dyzsdwtmwyfwwecvxigg","esakztco","oagabiwekpcdol","zcfhrik","hnyaoait","noyhmtwxwojyjuaset","kcrgfjqkylbcpw","jgynotkd","yuovicx","gcmtzalvsrszbewrco","tgw","kunysabwcxqbyn","jdzmvbslnalqpviproq","iibelvgfydnyjwut","dcj","jtoqspuajlxceleywrhg","xpykveacaustgfz","ahvpxxdn","lpzrhkieiizcefs","wx","ppvotdgvxh","dqwofgo","souynfygosu","adfs","xjqbbgzhcsrpmb","jwcfdsu","hifanyaaksrjgybec","dytonpanfickvjzgnmym","omokfungcjpafpxbxc","qsqqznppnupyfepzq","eepbuonjfflaq","gwazqykdpzvbpp","saxljsgskwzhilihaq","vfneornl","cwncnyjzamzxas","rfbrroetychlx","fhomtqrx","ycrvpolpkwplkscqbj","qajteaqumdriibaavq","vvajlmyhnufvtyjnzxby","umtz","uulqdlhexbfwbqh","yvzfovvqj","ajsre","ht","xmckqxduwlupqmfhomv","vobqmxkautvit","lqleyzheocqkqqneuw","pfv","gmreztayxn","rxzlyhqtgpcvmzhvzt","wvk","szizi","hgqprag","swkurmobxy","fpylfeavtdumfxhdtzg","nrjyxhnolptgb","tjfswgcokkqxxtosx","uoxulgfikdpwraujmbu","abnoowilifvefnzf","pwtyvjyyingc","njkgnghlujvxjxuzobq","ruutxb","ydfvinyidlpmiutwbh","zhvxhofmydhkw","fsjvh","fcmwmct","kro","dqdkfelqqhyqe","thnnevtbbakodkzu","osada","atfsnisp","amylahnejuvzkjixc","bsixrqgbgsbszzbdvouo","zdmhmphqfdwazsiio","tovmatfqqsrpublbxky","lqnpolmzsiwbfabdx","lbyhiwlp","khugyzrvq","atqmhuqhrvrv","fphmqx","qquedrhlcelztcbfigv","og","sqyfealucskwqmmkn","wdrojoxhtyvlfm","urxz","zuyjmcwotenyinslnaa","ipxdogxgonk","qvacjvj","uxgflgheygqb","apvvnmyvdgwildwtr","murupcssrboypxs","gbmhsxlvrvromjeh","bi","hepjnijzolseutt","ydjexijooyvan","jqnfkustjkbwiz","xqqbijsueejgfzusmdc","clm","yg","vr","aqzabmtasftew","fimlefvldpo","ppgh","xiqzftqz","swgtfsuolhgb","ipxatfsklhzpmlft","lkgmxdhu","rsaig","bdi","obetsl","gokqbehuwpdpucwy","keoikqtugv","drycwsn","gmkpx","cqabedymjb","zdt","dbnlw","tjaysmqel","dsqhvonfuvxkmcgouyj","vqniol","cixzbo","ptshnqjk","sfqyx","skaykrzglefxpel","tsa","ufvranil","fwnqwvivotkitv","zz","eqxmtnkebmu","hwiynbynim","jlncvrjycflgvmy","omdjavejpi","lquo","pxyph","foq","ieohzsfxlksxi","udwtzbxjtwz","jsbjhsbnapatgsb","rjvxvsdiiyxgg","fugjapyhsdmxvbo","gdjfeqfvssok","u","jydmbzqberxcf","rrxdegnpjqsghcspeof","sbxearhkgfbd","lmezpw","rhvjllizkgx","sxmredbhygh","jaib","xhue","ra","fjaxksvhnwdqnmj","htlcargojkidh","sbvdckaurdljqmw","dwtelyvntrsbdcsbqslt","xtoruyozfwab","sikzvkdnyqst","zdfavi","w","xuhvpaxak","cxup","xhrdhxvehuzpnwvne","oerlq","agt","gymwcgyjzr","ux","pa","ewppcjdyfrwjom","shd","vdgwclkc","pspfeyhxdxxscfhw","ip","tzoclbiztqojod","nfttllxmurcjogn","q","tkaqkbqdbsgvlsvi","teurcbpsdiaowotvu","fiuakbuk","jdiedfqowmahdmgto","ssdmbtqjkgnfapv","stirbyytobhkdkujvus","exvwcsijwxjfplm","mseqtjowogdbxhhkefxv","nrvfymq","ahznxvoi","gimjpgcgnhxiz","eoslaz","yfau","nymiwcr","zafivtmroezdtavfgjs","xzwkaemh","zwbzftznqrkajromvvxg","bxqqpfsyeflwgk","cfbdmzjscykmqtg","gctftzclyl","lvizojqtguvudx","tbvldqycztkvyryjvpn","qykht","xboc","dcmqwqwhhvo","pnhddwlskrvqoophb","kqkofiwtfzceklpnot","gjavalqf","yvdgewaoeyytybq","sradlvbcy","tjeupxezwmlpm","ryxtzfppqgxesjhjxmgd","gejfzgyzkfjzzoh","upfbfeuurow","bfuzhmcmsvxbkpmdc","gclznynsl","jlfhvqvixdgxzadvodlk","segxcy","tk","qforcmsooaft","hzuykvz","eiorkcdhpktp","cvfouowpritdmyzoupd","uwhdyhjx","wgynfxpaujufbnw","xeeqtlbw","tiyq","ugjgqc","qcqcrdyjcnblaftslxq","wpdwyej","ecuftymeeqrsawfogsib","ysxpox","badmukyhyqt","bphrkmijrjzwqpjsijyr","qjhmjdzicw","ujvjyulitszukeqnra","vsirqvthrqdzlflnj","konxmmqpuy","ogmj","wiaueccktyyp","crk","byzzjmhcjkigolnldcgr","ahrwkijszeb","jcsqgcd","o","umchy","uaemfypkaaynuspffyxq","d","amjun","skqkkdn","ztlnzbcmkhlnjbq","kcrqsexq","punuencn","mcw","plxyvh","eepfsbyxg","pdoznugathmjwtp","skqvqppjehzgqeis","qzhfuyidu","iujuirmzjd","muegnyosuihvgcymlkfa","fepte","hbjurnywanpjju","qkfpyroyaekvwedx","nzz","lqbk","wyw","vamdljxb","pph","ckwoskeyhnl","osalpoezsohevwctdxo","kvwuwqvj","lu","ktmmhfuvhjdmdmesxri","mwujlcrbhgcv","nozhlk","ijyrsyxnykfpzylqdwm","blhjpzrjjebgmf","wygceukqqx","qeedmw","ohb","z","gmfdzyfllacqomflyns","ywfmgaqpaxvktvdkqaq","profgsnptpmqouj","oonufwpvydy","oiatllvr","uuqgavledfogsxhrqa","ofc","cmkmzcxzk","jgid","kzyfbypbryuwmjxm","zyrurab","aryqgptihfxeaejzpvo","zghvmtgvwkykdawqhvo","ygmfhvizmvtl","vevzvinsrggikzzjpjb","kablyoihjmjmaukuphox","ywgqxwkhdrunyiz","hckbbdlgcigosexdu","lkj","pzfwjumm","juiaeihbatwexiencle","swmx","ezvrzt","roqlqprujj","mlv","rp","bzhkeudwgdzrdlmqd","xbht","kzwxsyiqy","fiknomhbobcjsozbwwv","vmxnosozxsclggeq","cuwqcumhmmpqtzumng","vfqrorcybgbmfrwiyeo","shherhmpjsvw","cpibfikeidcxwydgtl","uhhtptrgtb","ijy","fezfbluvjisqess","hizxyamq","zde","uvf","wehpcjausycrp","sfcwdlewssunklu","fznzbzangyeiyp","rjfzlidrki","kpwmoqerhmsfx","vhssuqodmr","sqfnucmnnuuleciaofim","iurigawhnkpsbwqz","psrssnymh","nogkdshmafbymcn","vbmibtscsirxmirb","qlnvzlawm","xpnfowxblnwehfriic","zgdzkmngort","iktrspqgwr","rupuarwdmskgdoa","aova","kljnisy","wljmsm","xdkuabackcthkcx","gzlwhkpheogffemm","uzlctjqmxy","cqqxrumchea","xydrkqf","vafmvpxlirzjibhp","znjmkhqcuc","khryznftaiaxoepvxesx","aeiqdavgmgy","pt","qt","ohdlhgeevsilbuwttlj","t","yqyljnjnctaoc","eedaghuilcolklonqgue","eiqkqruhuntqlpf","xisihhicyvdyezgsvkg","jjj","hkxaotilzziwsspecwjz","xhsoyarzemxiqt","bf","olvzhuwmkrvh","toiavdpqrfsqyiqjqd","oddy","kzjxxxddteofxb","ncoiwgjdrvh","ealxiuvuwtlmhatvfd","hkgxzczyzufyfxivdynl","qagvjrqwggrzvwfvao","dkxh","uzkcazifttr","bxmicgaztdihbox","vsrwil","ve","netsnqoyxrento","ovetvdaezkosdeu","rhgdujtm","savkejcknyh","lvkpiujch","eyrbj","tjmxp","oysupui","ntmsurcmwbmcbfohslwu","dgaiidtnqumtduyruo","cqmiiwcizfhzgh","dpwillrddoylbtj","vzi","xgyvcpohrafuvqsz","lbzmoduungspjzw","ymyhpuftjyuclfdslni","phwxduvz","gymilqcafcpfa","dshnveeafth","pznvuylvly","eucrpow","yjletiqdnmr","spvconcyyplrsqsaljw","uuuynfcdncyqptgcacj","h","qlqzjmqwipxp","yi","b","fgjwkkqjkmltpfcwz","dwtoryncscavdx","dfijmmouzpnqs","zhxwyhmbwjsckuss","bgaicwbdzidbcnqydn","wtsfqg","powwhpzskgxb","csaicezrxtbsstxjfd","hchyndyzntnfimwzdqkv","umappgamk","ya","xlwyokdbu","qoix","kynycydymax","mzwtmuuxsmtzhu","vnzgfg","bgvkmkneufclofws","hexeidwnwzovpoqdmmp","xcumymlpgdwfhfriiqe","jowewvkaqoaxtyq","guhatgn","jxksylljtahkhjf","eadzottxrfhcsyocrxun","cwuxoisk","keveyi","sdtqaqq","gda","g","fzsibyjopuhrs","xokyyxfnqazkdft","dwyshnvnrprcaudxn","qcpwdlccz","vbitusbrfwy","kpygfjgcrqhyfnvyr","qqsuk","kfenwxl","hupwnscxgqmdoe","e","nhqrlsbrvsecjeex","oivveghyhcsdm","imsecjhno","vgbblhisjxxbjezetgfh","wjayj","kcmlsvb","nskaxwnmemd","mestq","zmemwjwtslqjxmy","khhnlh","ufkkjbjqjwowfky","tcp","krfixzjdlwwrzmdcx","byuiiy","vncuwhhhendsyalta","lr","tstybparotdzzk","lrnj","rpxojhil","ruboiv","xijpopd","ddf","jtufbbnrmqvmgdp","ajtpkchifuezyegedv","uhskzszdqcaq","zj","km","zjkla","zhfjjhlyff","vntbovqyhhzsaa","apywcamqnrpahhcm","p","avuubu","x","ckwqicfgudfausvdl","xulwzqlzvdhvz","qwdqmhctbmlsbnd","phyjtimbwhlqpyvid","ngakotco","pfxdwjkge","toxrs","ehtvhna","dcamtjujhksmjdemqc","ndil","jzavlehhoenjho","yacnfphhcfdvmm","blzqgixmwolefrdi","yoo","igmzs","xghpae","quinshiyechpiabbg","i","tksyuu","wgjalfmle","qzjqfeskysjadc","sf","ugzqpwivchwklpfebsbv","ogeyzojaq","dnxpmqn","acoox","ibobflpkge","ntaozkjucioi","wdmzywxxbsj","hyysvxwcellqompme","vcvxcldodhdkvop","snwfii","ebcsgqjyyfpiolszk","qasbzs","plmmumz","hngyqkestcersvr","yopanti","skpw","kzcvfgm","ofwfqqomjgtz","tpftwgz","youynirvlrtgfgpsj","vbk","vf","tqxhw","kxavrslgglta","jixxwy","v","uovfdofu","dwsukfq","nsjpqvubrbhjg","qyxefp","hmmxdb","ig","azcvtuthcmrfhgmk","bxyutikbtjask","bplduujybpkisjagjmt","rnthvtoucxwk","anqpsbajzrxgmm","cswhnuw","fxcopuvvijlmykl","xuhrl","qrvxderkmcag","maqbolek","lptrlskiou","qc","sjfrgvvqimafxmnj","ywvjief","nqsiwdlx","vflebxa","xlrsddawft","svgchxsoy","fswqtujulxxpmwbgwo","sypiajzyqlqz","egtjsacdotqbubza","gmflxennmvuwumxyh","rrhxhaqiafvxyxw","knkvqwnonoryobdkhud","ychqrmchqvrpuo","qcfmp","wpqiinzzojryl","dbvchsjqdmnso","ufe","maptjbhtghbcokgciad","zeapbswgucmzh","djvbvkifgexofetfvjz","ykoxspnjsfnutqjluvz","yvbuowtwco","pfxraktjqgng","gozvydighmksse","uiouo","alka","opbxkpauazqymiuqfj","hqagitkm","ubcmcnxcblftwkuzt","uxtinluhpye","okzfepd","uzmjalhpowslayb","tfte","mcgcbwu","lwxbngaj","emlekbvewaujmlitdngs","zinhnmaphxfnmpiee","ygyxkcznfrpk","erqzhitvudlvrm","vkxzgxyxjzcjjm","vascffhbr","qz","fdrndrgkmidceypf","vamiamy","nwc","nbtopjac","mskw","zqdhjhsihe","iepvgxorlr","jievhwlnabtrrfxtvw","zzwrqufuwwwqiok","wpnhgtrywakacncqd","trpbbxo","ocdfdnviiwsar","hjkbb","qgslbamvjyhpijwvtc","iaoibknqpginlkp","tppqgwpkx","cjkeaomis","vgwgyurhjqunotl","kxopqehtyrn","vxanh","jgnoreuwqdnaeqkkq","vzeepbyinwwptg","owlpbyuun","sxgblfkzmztwiol","lg","zwejtdzsdiuclkamrd","artzloxrjwj","gsm","osojgctphefeixxi","yxjzowvqsbacie","bb","ahwguzbyuuruxv","fwblcuujkglamlckdhb","vplzfxxvj","ftohywnqhlxevzdcdlxn","gktc","hrltabkfxssimurtuscs","uuthsjedxnjqcb","fxmewflzneahyobr","wa","qthljybjydqkxlisi","jfnbdbxmtaikstsdap","lbc","ialzvi","zljphcdufxpi","zlppeqr","emse","tfizonq","bnmeepakrncvb","oasftet","jkupsuauhu","smttvbacwwik","an","yupxhyglkvh","uqtokphupy","ngs","vexiluoqeuqpzukwz","drtmtotzttqqvfcfkos","bqzakbo","urnnzmblpqe","op","zbjsxwb","rxjjhhoibueorid","xkzhrqmdgnawhypxw","morudqmtwdl","edxtdsmqfvrrhak","kriilx","tvlkurgsevqaidpxmv","ezfwzclmwmftdaum","tz","fcoieqixbumitqek","elnjzsyvuud","xzpigsr","tthtvhjmvzi","bbluzfheqzxsporfc","huaxrcklycxrjk","oboexzk","nn","tsapvxohykkgg","bubknjqijtjhsimu","zjpyyblegmhpceaqw","aylvsrptzrv","argjtqcxruxaxeayqr","qsmisusadcywslixe","zie","ozzphyflqth","zscbrdjkzq","wfamqzxmxlzo","dhdrsszxvglagz","n","iscuw","ifwvyqxkwgrbnigmyhx","fycydcmqrfrkyp","hjo","wxak","ruwwdfcu","etn","mxsqfvjlyucktmu","gxecugoqztrftrin","osxluvufsnhysboetwfr","imqbohffsannyqxcn","wumy","egrcc","bgjfscydhsrwrw","hewkhzcugzrdreic","bcrtzkswsn","erzlvjxjgxckwqvucske","wxnghglutyjjx","hehbsxnxdkrbz","oanlrzgt","xlyk","crldlnybrragxycj","veidptjunlvkopc","ykrdoqtpcaudky","imlaquhfhfrtiisdagxe","awstkglfz","lanydtfs","fwajbkdstfamamjz","veiomumuwcbepqb","crfbggfavy","btprmfewggu","oqkpeloktngmy","jfr","igikyrhk","hunulrfwitgmkinpxmb","xwuznmqc","ncmxuhgrh","mee","xawpezxbfbopkb","whworv","pzohfearzrpqdrhorqg","qhvmvryaahumdr","lguf","sunh","hnfumsefqp","jaxiqcskadqigva","irmjowwunx","ewpavinmnbfflb","uqhefkyetwejfkrt","qomr","brjhskquithctfxrev","sm","jvhybzonhmspbuuvfdk","afbtos","wbolpzwlodajh","dghbcduykdkktothras","jai","xyl","l","bawtemk","tsepmt","feznr","pclsclwugtcxenzfgrh","lkvlphksooq","gvsdqsgtfoizmld","gedubwydmgtha","ppvmduqbohjgogusud","fdt","dh","aearpwopfz","lwoghc","idf","eldptjms","dffymvyxpiq","es","hmbjwoybfa","tyauqvycos","qbthkj","qswp","yampem","rpnix","ozprvqorojz","ukebasubvmqw","jvaqzkredyawhtd","dzhxetiwqsixlystcj","saxxi","bbarhirxuuawr","sskntlbmjdmwttwq","yudzshsj","ledrctmrwztjitnjtvk","wlfwyhcevktec","zwdydnlzcpnxdvjlcast","pnxbhuqbtsyagdxpo","iwgkfhfx","jftaqgdchboye","dpspybd","nboepernc","kb","svyauocuymvccdofsd","wnum","kdmpcjyvtbmweiznybwc","palxdqzpepy","cujutejbq","wegkzumgzybpilflnzw","frycedczklggkysfuhwx","iuibhhjzcfhmuvc","gmzffwqgqwdypxnev","wzz","syv","ntgomrweqzgirr","mf","osmnime","jerrhfnmcwtccm","jfluamsg","zdxjiminaj","nebcjyewciisvgjfmdww","jgdlcrpwdefcon","rbjzsgmwbduhjld","hmmopj","esgldjpbxrczbwwp","vmiyyhllzvwrehktb","mdbuuvtlmnsgfzzctwcz","fzemohyidayqbac","woxccralrewjtzsmz","ltfdryrasyckjxvdki","hvklhjd","ozyhzbbfujixrkmxw","myeocedbwpvernstnjhu","uvxyzrxtxbnbsjvnr","sxthnzgop","ybpqrapohmtepk","errutkujessuxzikfo","vmhnnqarvosbnq","k","vgadsuwshugxc","tcppdbxbrlpaunulhda","wlftpohxnx","yybvhcdbwruywekrmsyr","rpcnioudtop","wpijpgtebibilpxmjqdg","tzfmwhzlnjplsiepqid","ijiiorjtfaldwl","ti","vdfv","rcoikzbsy","rreszszgtvpjovy","vyqjoauca","uz","npaosrmq","ergrskafxanwkmpj","zt","iwtkxsd","ldorrbekndm","muzrebirgnyf","oiwojoxqbgkutabp","ikrw","cqjqhwyjdx","gqytjedjkmpylkahupdn","mkjpyxt","fykxoikzsbuldqjjpy","usqefjtdzhwucfcmb","dijizkvanqqxade","awrykt","zwgdblix","huiolzafwoihxqhrk","icijawmicr","avgjof","ehmrp","bocgnykm","gbiaaopokr","fuhdlnijlcqy","lkiuva","tdoayivbfljkbohguko","owwperhen","qlbnkjks","gtewflvjow","oc","afuujedcnhivnbt","oannhllzgip","wafmzxi","haakrsds","zhinr","ke"));
+		for(int i=0; i<sList.size(); i++) {
+			System.out.println(wordBreak(sList.get(i), dictList.get(i)));
+			System.out.println(wordBreak_memo_map(sList.get(i), dictList.get(i)));
 		}
-		return flag;
+
 	}
-
-	public static boolean wordBreak2(String s, List<String> wordDict) {
-        return wordBreakMemo(s, new HashSet<>(wordDict), 0, new Boolean[s.length()]);
-    }
-
-    private static boolean wordBreakMemo(String s, Set<String> wordDict, int start, Boolean[] memo) {
-        if (start == s.length()) {
-            return true;
-        }
-        if (memo[start] != null) {
-            return memo[start];
-        }
-        for (int end = start + 1; end <= s.length(); end++) {
-            if (wordDict.contains(s.substring(start, end)) && wordBreakMemo(s, wordDict, end, memo)) {
-                return memo[start] = true;
-            }
-        }
-        return memo[start] = false;
-    }
 
 	public static boolean wordBreak(String s, List<String> wordDict) {
-		count=0;
+        return wordBreakMemo(s, 0, new HashSet<>(wordDict), new Boolean[s.length()]);
+    }
+
+    private static boolean wordBreakMemo(String s, int index, Set<String> wordDict, Boolean[] memo) {
+        if(index>=s.length()) {
+    		return true;
+    	}
+    	if(memo[index]!=null) return memo[index];
+    	for(int i=index; i<s.length(); i++) {
+            if(wordDict.contains(s.substring(index, i+1))) {
+                boolean result = wordBreakMemo(s, i+1, wordDict, memo);
+                memo[index]=result;
+                	if(result) {
+                		return true;
+                	}
+            }
+        }
+        return false;
+    }
+
+	public static boolean wordBreak_memo_map(String s, List<String> wordDict) {
        return dfs(s, new HashSet<>(wordDict), new HashMap<>());
     }
-    static int count;
     public static boolean dfs(String s, Set<String> wordDict, Map<String, Boolean> map) {
-    	System.out.println(count++);
         if(s.length()==0) return true;
         if(map.containsKey(s)) return map.get(s);
         for(int i=1; i<=s.length(); i++) {
